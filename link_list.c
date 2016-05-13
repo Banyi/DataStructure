@@ -21,11 +21,15 @@ void destroyList();
 bool isEmptyList(); 
 int listLenght();
 int getElem();
+void insertList();
+void deleteElem();
+bool findElem();
+void mergeList();
 
 
 int main()
 {
-	LinkList a, pList;
+	LinkList a, Lb, pList;
 	int len = 0;
 	int item = 0;
 	
@@ -38,11 +42,29 @@ int main()
 	showList(a);
 	
 	//destroyList(a);
-	isEmptyList(a);
-	listLenght(a);
-	showList(a);
-	item = getElem(a, 3);
-	printf("Element:%d", item);
+	//isEmptyList(a);
+	//listLenght(a);
+	//showList(a);
+	//item = getElem(a, 3);
+	//printf("Element:%d", item);
+	
+	//insertList(a, 2, 20);
+	//showList(a);
+	
+	//deleteElem(a, 4);
+	//showList(a);
+	
+	//findElem(a,7);
+	
+	
+	initList(&Lb);
+	printf("Input:");
+	scanf("%d", &len);
+	createList(Lb, len);
+	showList(Lb);
+	mergeList(a, Lb, pList);
+	showList(pList);
+	
 	
 	//clearList(a);
 	return 0;
@@ -178,5 +200,110 @@ int getElem(LinkList head, int n)
 	}
 	return head->data;
 	system("PAUSE"); 
+}
+
+/*9.在链表中的第i个节点插入元素值item*/
+void insertList(LinkList head, int n, int item)
+{
+	int i=0;
+	LinkList p1 = malloc(sizeof(Node));;
+	if(!p1)
+	    return;
+	    
+	p1->data = item;
+	p1->next = NULL;
+	if(!head)
+	{
+		head = p1;
+		return;
+	}
+	
+	while(head)
+	{
+		i++;
+		if(i == n+1)
+		{
+			p1->next = head->next;
+			head->next = p1; 
+		}
+		head = head->next;
+	}
+}
+
+/*10.删除链表中第i个节点*/
+void deleteElem(LinkList head, int n, int item) 
+{
+	int i = 0;
+	if(!head)
+	    return;
+	
+	while(head)
+	{
+		i++;
+		if(i==n)
+		{
+			head->next = head->next->next;
+		}
+		head = head->next;
+	}
+	return;
+}
+
+/*11.查找链表中是否存在元素item*/
+bool findElem(LinkList head, int item)
+{
+	while(head->next)
+	{
+		if(head->next->data == item)
+		{
+			printf("元素%d在链表中\n", item);
+			return true;
+		}   
+		head = head->next;
+	}
+	printf("元素%d不在链表中\n");
+	return false;
+}
+
+/*12.合并两个链表*/
+void mergeList(LinkList La, LinkList Lb, LinkList Lc)
+{
+	int i = 1;
+	int j = 1;
+	int k = 0;
+	int a, b;
+	int La_len, Lb_len;
+	La_len = listLenght(La);
+	Lb_len = listLenght(Lb);
+	Lc = (LinkList)malloc(sizeof(Node));
+	if(!Lc)
+	    return;
+	
+	while((i<La_len) && (j<Lb_len))
+	{
+		a = getElem(La, i);
+		b = getElem(Lb, j);
+		if(a<b)
+		 {
+		 	insertList(Lc, ++k, a);
+		 	i++;
+		 }   
+		else
+		{
+			insertList(Lc, ++k, b);
+			j++;
+		}
+	}
+	
+	while(i<La_len)
+	{
+		a = getElem(La, ++i);
+		insertList(Lc, ++k, a);
+	}
+	while(j<Lb_len)
+	{
+		b = getElem(Lb, ++j);
+		insertList(Lc, ++k, b);
+	}
 }
 
