@@ -2,18 +2,30 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
+/*状态码*/
+#define TRUE         1
+#define FALSE        0
+#define OK           1
+#define YES          1
+#define NO           0
+#define ERROR        0
+#define SUCCESS      1
+#define FAIL         0
+#define OVERFLOW    -2
+#define UNDEFLOW    -3
 
-typedef int elemType;
+typedef int Status; 
+typedef int ElemType;
 
-typedef struct Node
+typedef struct LNode
 {
-	elemType  data;
-	struct Node *next;
-}Node, *LinkList;
+	ElemType  data;
+	struct LNode *next;
+}LNode, *LinkList;
 
 
 /*申明函数*/ 
-void initList();
+Status initList();
 void createList();
 void showList();
 void clearList();
@@ -27,7 +39,8 @@ bool findElem();
 void mergeList();
 
 
-int main()
+
+int main(void)
 {
 	LinkList a, Lb, pList;
 	int len = 0;
@@ -56,7 +69,7 @@ int main()
 	
 	//findElem(a,7);
 	
-	
+	/*
 	initList(&Lb);
 	printf("Input:");
 	scanf("%d", &len);
@@ -64,47 +77,47 @@ int main()
 	showList(Lb);
 	mergeList(a, Lb, pList);
 	showList(pList);
+	*/
 	
-	
-	//clearList(a);
+	clearList(a);
 	return 0;
 }
 
-
 /*1.初始化链表，使得单链表表头指针为空*/
-void initList(LinkList *head)
+Status initList(LinkList *head)
 {
-	*head = (LinkList)malloc(sizeof(Node));  //申请分配空间
-	if (*head == NULL)
-	{
-		perror("malloc error");
-		printf("内存分配失败！");
-		exit(1);
-	}
+	(*head) = (LinkList)malloc(sizeof(LNode));  //申请分配空间
+	if (!(*head))
+		exit(OVERFLOW);
 	(*head)->next = NULL;              //初始化为空 
+	return OK;
 }
 
 /*2.创建线性表，并初始化把i赋值给第i个节点的data*/ 
 void createList(LinkList head, int n)   
 {
+	//int i;
 	LinkList p;
+	//ElemType tem;
 	
-	while (n--)
+	head = (LinkList)malloc(sizeof(LNode));
+	if(!head)
+	    exit(OVERFLOW);
+	head->next = NULL;
+
+	
+	while(n--)
 	{
-		p = (LinkList)malloc(sizeof(Node));
-	    if (p == NULL)
-	    {
-		    perror("malloc");
-		    printf("内存分配失败！");
-		    exit(1);
-	    }
+		p = (LinkList)malloc(sizeof(LNode));
+		if(!p)
+	        exit(OVERFLOW);
 	    
-		p->data = n + 1;     //给完成的新节点赋值
-		p->next = head->next;
-		head->next = p;
+	    p->data = n + 1;      //tem;
+	    p->next = head->next;
+	    head->next = p;
+	    //printf("data:%d\t", p->data);
 	}
-	//return head;
-	
+	return;
 }
 
 /*3.打印线性表*/ 
@@ -113,7 +126,7 @@ void showList(LinkList head)
 	printf("链表的值为：");
 	while (head->next)  // tem != NULL
 	{
-		printf("%d\t", head->next->data);
+		printf("%d\t", head->next->data);   //
 		head = head->next;   // tem = tem->next
 	}
 	printf("\n");
@@ -206,7 +219,7 @@ int getElem(LinkList head, int n)
 void insertList(LinkList head, int n, int item)
 {
 	int i=0;
-	LinkList p1 = malloc(sizeof(Node));;
+	LinkList p1 = malloc(sizeof(LNode));;
 	if(!p1)
 	    return;
 	    
@@ -275,7 +288,7 @@ void mergeList(LinkList La, LinkList Lb, LinkList Lc)
 	int La_len, Lb_len;
 	La_len = listLenght(La);
 	Lb_len = listLenght(Lb);
-	Lc = (LinkList)malloc(sizeof(Node));
+	Lc = (LinkList)malloc(sizeof(LNode));
 	if(!Lc)
 	    return;
 	
