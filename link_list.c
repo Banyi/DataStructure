@@ -32,8 +32,8 @@ void clearList();
 void destroyList();
 bool isEmptyList(); 
 int listLenght();
-int getElem();
-void insertList();
+Status getElem();
+Status insertList();
 void deleteElem();
 bool findElem();
 void mergeList();
@@ -45,6 +45,7 @@ int main(void)
 	LinkList a, Lb, pList;
 	int len = 0;
 	int item = 0;
+	ElemType e;
 	
 	initList(&a);
 	
@@ -58,7 +59,7 @@ int main(void)
 	//isEmptyList(a);
 	//listLenght(a);
 	//showList(a);
-	//item = getElem(a, 3);
+	//item = getElem(a, 3, e);
 	//printf("Element:%d", item);
 	
 	//insertList(a, 2, 20);
@@ -96,14 +97,13 @@ Status initList(LinkList *head)
 /*2.创建线性表，并初始化把i赋值给第i个节点的data*/ 
 void createList(LinkList head, int n)   
 {
-	//int i;
 	LinkList p;
 	//ElemType tem;
 	
-	head = (LinkList)malloc(sizeof(LNode));
-	if(!head)
-	    exit(OVERFLOW);
-	head->next = NULL;
+	//head = (LinkList)malloc(sizeof(LNode));
+	//if(!head)
+	  //  exit(OVERFLOW);
+	//head->next = NULL;
 
 	
 	while(n--)
@@ -180,18 +180,34 @@ int listLenght(LinkList head)
 	{
 		++size;
 		head = head->next;
-		// printf("Len:%d\t", size);
 	}
 	printf("链表长度为：%d\n", size);
 	return size;
 }
 
-
-/*8.获取第i个数据元素的值*/
-int getElem(LinkList head, int n) 
+/*8.获取第i个数据元素的值,若存在赋值给e并返回OK，否则返回ERROR*/
+Status getElem(LinkList head, int n, ElemType e) 
 {
-	int i=0;
+	int i = 0;
+	LinkList p = malloc(sizeof(LNode));
+	if(!(p))
+	    exit(OVERFLOW);
 	
+	p = head->next;
+	i = 1;
+	while(p && (i < n))
+	{
+		p = p->next;
+		i++;
+	}
+	
+	if(!p || i > n)
+	    return ERROR;   //元素不存在
+	
+	e = p->data;
+	return OK; 
+	
+	/*
 	if(head == NULL)
 	{
 		printf("空链表！\n");
@@ -213,16 +229,36 @@ int getElem(LinkList head, int n)
 	}
 	return head->data;
 	system("PAUSE"); 
+	*/
 }
 
-/*9.在链表中的第i个节点插入元素值item*/
-void insertList(LinkList head, int n, int item)
+/*9.在链表中的第i个节点前插入元素item*/
+Status insertList(LinkList head, int n, ElemType item)
 {
-	int i=0;
+	int i = 0;
 	LinkList p1 = malloc(sizeof(LNode));;
 	if(!p1)
-	    return;
-	    
+	    exit(OVERFLOW);
+	p1 = head;
+	while(p1 && (i < (n - 1)))
+	{
+		p1 = p1->next;
+		i++;
+	}
+	if(!p1 || (i > (n - 1)))
+	    return ERROR;
+	
+	item = p1->data;
+	LinkList s = malloc(sizeof(LNode));
+	if(!s)
+	    exit(OVERFLOW);
+	s->data = item;
+	s->next = p1->next;
+	p1->next = s;
+	
+	return OK;
+	
+	/*   
 	p1->data = item;
 	p1->next = NULL;
 	if(!head)
@@ -241,6 +277,7 @@ void insertList(LinkList head, int n, int item)
 		}
 		head = head->next;
 	}
+	*/
 }
 
 /*10.删除链表中第i个节点*/
@@ -278,7 +315,7 @@ bool findElem(LinkList head, int item)
 	return false;
 }
 
-/*12.合并两个链表*/
+/*12.合并两个链表
 void mergeList(LinkList La, LinkList Lb, LinkList Lc)
 {
 	int i = 1;
@@ -319,4 +356,5 @@ void mergeList(LinkList La, LinkList Lb, LinkList Lc)
 		insertList(Lc, ++k, b);
 	}
 }
+*/
 
