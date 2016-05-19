@@ -1,2 +1,2 @@
 # DataStructure
-C语言实现数据
+C实现数据结构
