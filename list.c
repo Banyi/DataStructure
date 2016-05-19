@@ -4,7 +4,7 @@
 
 
 
-/*çŠ¶æ€ç */
+/*×´Ì¬Âë*/
 #define TRUE         1
 #define FALSE        0
 #define OK           1
@@ -26,7 +26,7 @@ typedef struct LNode
 }LNode, *LinkList;
 
 
-/*ç”³æ˜å‡½æ•°*/ 
+/*ÉêÃ÷º¯Êı*/ 
 Status initList();
 void createList();
 void createList_L();
@@ -78,7 +78,7 @@ int main(void)
 	createList(Lb, len);
 	showList(Lb);
 	mergeList(a, Lb, &pList);
-	printf("åˆå¹¶åçš„é“¾è¡¨ï¼š");
+	printf("ºÏ²¢ºóµÄÁ´±í£º");
 	showList(*pList);
 	
 	showList(a);
@@ -92,17 +92,17 @@ int main(void)
 	return 0;
 }
 
-/*1.åˆå§‹åŒ–é“¾è¡¨ï¼Œä½¿å¾—å•é“¾è¡¨è¡¨å¤´æŒ‡é’ˆä¸ºç©º*/
+/*1.³õÊ¼»¯Á´±í£¬Ê¹µÃµ¥Á´±í±íÍ·Ö¸ÕëÎª¿Õ*/
 Status initList(LinkList *head)
 {
-	(*head) = (LinkList)malloc(sizeof(LNode));  //ç”³è¯·åˆ†é…ç©ºé—´
+	(*head) = (LinkList)malloc(sizeof(LNode));  //ÉêÇë·ÖÅä¿Õ¼ä
 	if (!(*head))
 		exit(OVERFLOW);
-	(*head)->next = NULL;              //åˆå§‹åŒ–ä¸ºç©º 
+	(*head)->next = NULL;              //³õÊ¼»¯Îª¿Õ 
 	return OK;
 }
 
-/*2.åˆ›å»ºçº¿æ€§è¡¨ï¼Œå¹¶åˆå§‹åŒ–æŠŠièµ‹å€¼ç»™ç¬¬iä¸ªèŠ‚ç‚¹çš„data*/ 
+/*2.´´½¨ÏßĞÔ±í£¬²¢³õÊ¼»¯°Ñi¸³Öµ¸øµÚi¸ö½ÚµãµÄdata*/ 
 void createList(LinkList head, int n)   
 {
 	LinkList p;
@@ -121,16 +121,16 @@ void createList(LinkList head, int n)
 	return;
 }
 
-/*3.æ‰“å°çº¿æ€§è¡¨*/ 
+/*3.´òÓ¡ÏßĞÔ±í*/ 
 void showList(LinkList head)
 {
 	if(head == NULL)
 	{
-		printf("é“¾è¡¨å€¼ä¸ºï¼šNULL!");
+		printf("Á´±íÖµÎª£ºNULL!");
 		return;
 	}
 	
-	printf("é“¾è¡¨çš„å€¼ä¸ºï¼š");
+	printf("Á´±íµÄÖµÎª£º");
 	while (head->next)  // tem != NULL
 	{
 		printf("%d\t", head->next->data);   //
@@ -140,7 +140,7 @@ void showList(LinkList head)
 	system("PAUSE");
 }
 
-/*4.æ¸…é™¤çº¿æ€§è¡¨ä¸­çš„æ‰€æœ‰å…ƒç´ ï¼Œé‡Šæ”¾å•é“¾è¡¨ä¸­çš„æ‰€æœ‰èŠ‚ç‚¹ï¼Œä½¿ä¹‹æˆç©ºè¡¨*/
+/*4.Çå³ıÏßĞÔ±íÖĞµÄËùÓĞÔªËØ£¬ÊÍ·Åµ¥Á´±íÖĞµÄËùÓĞ½Úµã£¬Ê¹Ö®³É¿Õ±í*/
 void clearList(LinkList head)
 {
 	LinkList p;
@@ -150,10 +150,10 @@ void clearList(LinkList head)
 		free(head);
 		head = p;
 	}
-	printf("è¡¨å·²æ¸…ç©ºï¼\n");
+	printf("±íÒÑÇå¿Õ£¡\n");
 }
 
-/*5.é”€æ¯çº¿æ€§è¡¨ï¼Œè·ŸclearList()ä¸€æ ·*/
+/*5.Ïú»ÙÏßĞÔ±í£¬¸úclearList()Ò»Ñù*/
 void destroyList(LinkList head)
 {
 	LinkList p;
@@ -163,23 +163,23 @@ void destroyList(LinkList head)
 		free(head);
 		head = p;
 	}
-	printf("è¡¨å·²é”€æ¯ï¼\n");
+	printf("±íÒÑÏú»Ù£¡\n");
 	return;
 }
 
-/*6.åˆ¤æ–­çº¿æ€§è¡¨æ˜¯å¦ä¸ºç©ºï¼Œè‹¥ä¸ºç©ºè¿”å›Trueï¼Œå¦åˆ™è¿”å›False*/
+/*6.ÅĞ¶ÏÏßĞÔ±íÊÇ·ñÎª¿Õ£¬ÈôÎª¿Õ·µ»ØTrue£¬·ñÔò·µ»ØFalse*/
 Status ListEmpty(LinkList head) 
 {
 	if(head)
 	{
-	    printf("é“¾è¡¨ä¸ä¸ºç©ºï¼\n");
+	    printf("Á´±í²»Îª¿Õ£¡\n");
 		return TRUE;	
 	}
 	    
 	return FALSE;
 }
 
-/*7.å¾—å‡ºçº¿æ€§è¡¨çš„é•¿åº¦*/
+/*7.µÃ³öÏßĞÔ±íµÄ³¤¶È*/
 int listLenght(LinkList head) 
 {
 	int size=0;
@@ -189,11 +189,11 @@ int listLenght(LinkList head)
 		++size;
 		head = head->next;
 	}
-	printf("é“¾è¡¨é•¿åº¦ä¸ºï¼š%d\n", size);
+	printf("Á´±í³¤¶ÈÎª£º%d\n", size);
 	return size;
 }
 
-/*8.è·å–ç¬¬iä¸ªæ•°æ®å…ƒç´ çš„å€¼,è‹¥å­˜åœ¨èµ‹å€¼ç»™eå¹¶è¿”å›OKï¼Œå¦åˆ™è¿”å›ERROR*/
+/*8.»ñÈ¡µÚi¸öÊı¾İÔªËØµÄÖµ,Èô´æÔÚ¸³Öµ¸øe²¢·µ»ØOK£¬·ñÔò·µ»ØERROR*/
 Status getElem(LinkList head, int n, ElemType *item) 
 {
 	int i = 0;
@@ -209,13 +209,13 @@ Status getElem(LinkList head, int n, ElemType *item)
 	}
 	
 	if(!p || i > n)
-	    return ERROR;   //å…ƒç´ ä¸å­˜åœ¨
+	    return ERROR;   //ÔªËØ²»´æÔÚ
 	*item = p->data;
 	
 	return OK; 
 }
 
-/*9.åœ¨é“¾è¡¨ä¸­çš„ç¬¬iä¸ªèŠ‚ç‚¹å‰æ’å…¥å…ƒç´ item*/
+/*9.ÔÚÁ´±íÖĞµÄµÚi¸ö½ÚµãÇ°²åÈëÔªËØitem*/
 Status insertList(LinkList head, int n, ElemType item)
 {
 	int i = 0;
@@ -242,14 +242,14 @@ Status insertList(LinkList head, int n, ElemType item)
 	return OK;
 }
 
-/*10.åˆ é™¤é“¾è¡¨ä¸­ç¬¬iä¸ªèŠ‚ç‚¹,å¹¶ç”±itemè¿”å›å…¶å€¼*/
+/*10.É¾³ıÁ´±íÖĞµÚi¸ö½Úµã,²¢ÓÉitem·µ»ØÆäÖµ*/
 Status deleteList(LinkList head, int n, ElemType *item) 
 {
 	int i = 0;
 	LinkList p = head;
 	LinkList q = malloc(sizeof(LNode));
 	while(p->next && i < (n - 1))
-	{                        //ç§»åŠ¨æŒ‡é’ˆ 
+	{                        //ÒÆ¶¯Ö¸Õë 
 		p = p->next;
 		i++;
 	}
@@ -263,9 +263,24 @@ Status deleteList(LinkList head, int n, ElemType *item)
 	free(q);
 	
 	return OK;
+	/*
+	if(!head)
+	    return;
+	
+	while(head)
+	{
+		i++;
+		if(i==n)
+		{
+			head->next = head->next->next;
+		}
+		head = head->next;
+	}
+	return;
+	*/
 }
 
-/*11.åˆå¹¶ä¸¤ä¸ªé“¾è¡¨*/
+/*11.ºÏ²¢Á½¸öÁ´±í*/
 void mergeList(const LinkList La, LinkList Lb, LinkList *Lc)
 {
 	LinkList pa, pb, pc;
@@ -280,7 +295,7 @@ void mergeList(const LinkList La, LinkList Lb, LinkList *Lc)
 		{
 			pc->next = pa;
 			pc = pa;
-			pa = pa->next;  //ç§»åŠ¨æŒ‡é’ˆæŒ‡å‘ä¸‹ä¸€ä¸ª 
+			pa = pa->next;  //ÒÆ¶¯Ö¸ÕëÖ¸ÏòÏÂÒ»¸ö 
 		}
 		else
 		{
@@ -297,7 +312,7 @@ void mergeList(const LinkList La, LinkList Lb, LinkList *Lc)
 	return;
 }
 
-/*12.åœ¨çº¿æ€§è¡¨ä¸­ç¬¬ä¸€ä¸ªä¸eç›¸ç­‰çš„å…ƒç´ çš„ä½åº*/
+/*12.ÔÚÏßĞÔ±íÖĞµÚÒ»¸öÓëeÏàµÈµÄÔªËØµÄÎ»Ğò*/
 int locateElem(LinkList head, ElemType e, Status(*compare)(ElemType, ElemType)) 
 {
 	int i;
@@ -320,7 +335,7 @@ int locateElem(LinkList head, ElemType e, Status(*compare)(ElemType, ElemType))
 	return i;
 }
 
-/*å¦‚æœitemå¤§äºe è¿”å›OKï¼Œå¦åˆ™è¿”å›FALSE */
+/*Èç¹ûitem´óÓÚe ·µ»ØOK£¬·ñÔò·µ»ØFALSE */
 Status compare(ElemType e, ElemType item)
 {     
 	if(e <= item)
