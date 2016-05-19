@@ -4,7 +4,7 @@
 
 
 
-/*状态码*/
+/*----状态码----*/
 #define TRUE         1
 #define FALSE        0
 #define OK           1
@@ -26,7 +26,7 @@ typedef struct LNode
 }LNode, *LinkList;
 
 
-/*申明函数*/ 
+/*-----基本操作的函数原型说明------*/ 
 Status initList();
 void createList();
 void createList_L();
