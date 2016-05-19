@@ -34,7 +34,7 @@ void showList();
 void clearList();
 void destroyList();
 Status ListEmpty(); 
-int listLenght();
+int listLength();
 Status getElem();
 Status insertList();
 Status deleteList();
@@ -180,7 +180,7 @@ Status ListEmpty(LinkList head)
 }
 
 /*7.得出线性表的长度*/
-int listLenght(LinkList head) 
+int listLength(LinkList head) 
 {
 	int size=0;
 
