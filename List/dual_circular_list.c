@@ -28,7 +28,7 @@ Status initList();
 Status clearList();
 void destroyList();
 Status ListEmpty();
-int ListLenght();
+int ListLength();
 Status getElem();
 int locateElem();
 Status priorElem();
@@ -129,7 +129,7 @@ Status ListEmpty(DuLinkList head)
 } 
  
  /*5.返回链表的长度*/
-int ListLenght(DuLinkList head)
+int ListLength(DuLinkList head)
 {
  	 int lenght; 
  	 DuLinkList p;
