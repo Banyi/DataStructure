@@ -61,7 +61,7 @@ int main()
 	}
 	showList(L);
 	
-	size = ListLenght(L);
+	size = ListLength(L);
 	printf("List size:%d\n", size);
 	
 	getElem(L, 3, &item);
