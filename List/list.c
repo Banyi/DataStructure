@@ -60,7 +60,7 @@ int main(void)
 	showList(a);
 	
 	ListEmpty(a);
-	listLenght(a);
+	listLength(a);
 	showList(a);
 	
 	getElem(a, 3, &e);
