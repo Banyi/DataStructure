@@ -1,88 +1,8 @@
+#ifndef DUAL_CIRCULAR_LIST_C
+#define DUAL_CIRCULAR_LIST_C
 #include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include"dual_circular_list.h"
 
-/*状态码*/
-#define  TRUE         1
-#define  FALSE        0
-#define  OK           1
-#define  YES          1
-#define  NO           0
-#define  ERROR        0
-#define  SUCCESS      1
-#define  OVERFLOW    -2
-
-
-
-typedef int ElemType;
-typedef int Status;
-
-typedef struct DuLNode
-{
-	ElemType data;
-	struct DuLNode *prior;
-	struct DuLNode *next;
-}DuLNode, *DuLinkList;
-
-Status initList();
-Status clearList();
-void destroyList();
-Status ListEmpty();
-int ListLength();
-Status getElem();
-int locateElem();
-Status priorElem();
-Status nextElem();
-DuLinkList getElemPtr();
-Status insertList();
-Status deleteList();
-void showList();
-
-Status compare();
-
-
-int main()
-{
-	DuLinkList L;
-	int i, size;
-	ElemType e, item, count;
-	ElemType pre_e, next_e, elem;
-	
-	initList(&L);
-	
-	ListEmpty(L) ? printf("链表为空！\n") : printf("链表不为空！\n");
-	
-	printf("插入元素：\n");
-	//insertList(L, 1, 10);
-	//printf("%d\n", L->next->data);
-	for(i=1; i<=5; i++)
-	{
-		insertList(L, i, 2*i);
-	}
-	showList(L);
-	
-	size = ListLength(L);
-	printf("List size:%d\n", size);
-	
-	getElem(L, 3, &item);
-	printf("GetElem:%d\n", item);
-	
-	count = locateElem(L, 7, &compare);
-	printf("Count:%d\n", count);
-	
-	priorElem(L, 6, &pre_e);
-	nextElem(L, 6, &next_e);
-	printf("pre_e:%d\tnext_e:%d\n", pre_e, next_e);
-	
-	deleteList(L, 1, &elem);
-	printf("Dalete elememt:%d\n", elem);
-	showList(L);
-	
-	clearList(L);
-	showList(L);
-	
-	return 0;
-}
 
 /*1.初始化双向循环链表 */
 Status initList(DuLinkList *head)
@@ -129,7 +49,7 @@ Status ListEmpty(DuLinkList head)
 } 
  
  /*5.返回链表的长度*/
-int ListLength(DuLinkList head)
+int ListLenght(DuLinkList head)
 {
  	 int lenght; 
  	 DuLinkList p;
@@ -326,3 +246,5 @@ Status compare(ElemType e, ElemType item)
 		return OK;
 	return ERROR;
 }
+
+#endif
